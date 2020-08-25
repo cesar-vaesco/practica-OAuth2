@@ -11,4 +11,6 @@ public interface IUserService {
 	public void save(User user);
 	
 	public User findById(Long id);
+	
+	public User findUser(User user);
 }

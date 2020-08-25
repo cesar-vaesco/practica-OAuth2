@@ -59,4 +59,11 @@ public class UserServiceImpl implements IUserService, UserDetailsService {
 		return  userDao.findById(id).orElse(null);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public User findUser(User user) {
+		// TODO Auto-generated method stub
+		return (User) userDao.findByUserName(user.getUserName());
+	}
+
 }
