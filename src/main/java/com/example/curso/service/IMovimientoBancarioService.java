@@ -4,12 +4,12 @@ import java.util.List;
 
 import com.example.curso.entity.MovimientoBancario;
 
-public interface IMovimientoBancario {
+public interface IMovimientoBancarioService {
 
 	
 	public List<MovimientoBancario> findAll();
 	
 	public void save (MovimientoBancario movimientoBancario);
 	
-	public List<MovimientoBancario> getMovimientoUSer(Long id);
+	public List<MovimientoBancario> getMovimientoUser(Long id);
 }
