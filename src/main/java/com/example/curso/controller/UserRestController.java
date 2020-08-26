@@ -25,6 +25,17 @@ public class UserRestController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder; // Codificador de contraseñas
 
+	/*
+	 * URL: http://localhost:8071/api/user
+	 * 
+	 * Ejemplo de cuerpo de respuesta:
+	 * 
+	 * [ { "id": 1, 
+	 * "userName": "Vero", 
+	 * "password":"$2a$10$8/rQ/8onxtQKAYbLT3Ke9O1E6CyHBDgT1wlBYRriGdcb9r7Vn.d7a", 
+	 * "createAt":"2020-08-26" 
+	 * }]
+	 */
 	@GetMapping("/user")
 	public ResponseEntity<?> obtenerUsuarios() {
 		List<User> users = userService.findAll();
@@ -35,14 +46,26 @@ public class UserRestController {
 		}
 	}
 
-	@PostMapping("create_user")
+	/**
+	 * URL:http://localhost:8071/api/create_user
+	 * 
+	 * Cuerpo de la petición: { "userName":"cesar", "password": 1234 }
+	 */
+	@PostMapping("/create_user")
 	public ResponseEntity<?> create(@RequestBody User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		this.userService.save(user);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	@PostMapping("create_user2")
+	/**
+	 * Creando un usuario con validación
+	 * 
+	 * * URL:http://localhost:8071/api/create_user2
+	 * 
+	 * Cuerpo de la petición: { "userName":"cesar", "password": 1234 }
+	 */
+	@PostMapping("/create_user2")
 	public ResponseEntity<?> create2(@RequestBody User user) {
 		if (userService.findUser(user) == null) {
 			user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

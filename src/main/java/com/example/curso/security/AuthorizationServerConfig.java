@@ -30,15 +30,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private IUserService userService;
 
 	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+	public void configure(ClientDetailsServiceConfigurer clients) throws Exception{
 		clients.inMemory()
 		.withClient("androidApp")
 		.secret(bCryptPasswordEncoder.encode("123"))
 		.authorizedGrantTypes("password", "refresh_token")
-		.scopes("read","write")
+		.scopes("read", "write")
 		.accessTokenValiditySeconds(1*60)
 		.refreshTokenValiditySeconds(2*60);
-		
 	}
 	
 	@Override

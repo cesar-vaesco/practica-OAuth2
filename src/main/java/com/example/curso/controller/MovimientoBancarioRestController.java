@@ -22,13 +22,17 @@ public class MovimientoBancarioRestController {
 	@Autowired
 	private IMovimientoBancarioService movimientoBancarioSevice;
 
+	
+	/*
+	 * http://localhost:8071/api/secure/oauth2/movimiento_bancario
+	 * */
 	@GetMapping("/movimiento_bancario")
 	public ResponseEntity<?> movimientos() {
 		List<MovimientoBancario> movimientosBancarios = movimientoBancarioSevice.findAll();
 		if (movimientosBancarios != null) {
 			return new ResponseEntity<>(movimientosBancarios, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 	}
 	
